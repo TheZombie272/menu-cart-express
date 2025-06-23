@@ -1,73 +1,45 @@
-# Welcome to your Lovable project
+# Requisitos previos
+Node.js (recomendado v16 o superior)
+npm (Node Package Manager) o yarn
+Git
 
-## Project info
-
-**URL**: https://lovable.dev/projects/20fd7aa5-9c2b-4462-9f52-0dba08d194e3
-
-## How can I edit this code?
-
-There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/20fd7aa5-9c2b-4462-9f52-0dba08d194e3) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+# Instalación
+1. Clona el repositorio
+2. Abre tu terminal y ejecuta:
+```
+git clone https://github.com/TheZombie272/menu-cart-express.git
+```
+```
+cd tu-repositorio-restaurante
 ```
 
-**Edit a file directly in GitHub**
+# Instala las dependencias
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+Ejecuta en la raíz del proyecto:
 
-**Use GitHub Codespaces**
+```
+npm install
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+# Ejecutar la aplicación en desarrollo
+Para iniciar el servidor de desarrollo y ver la aplicación en tu navegador, ejecuta:
 
-## What technologies are used for this project?
+```
+npm start
+```
 
-This project is built with:
+* Esto abrirá la app en http://localhost:3000 (por defecto).
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## Construir para producción
 
-## How can I deploy this project?
+Si deseas crear una versión optimizada para producción:
 
-Simply open [Lovable](https://lovable.dev/projects/20fd7aa5-9c2b-4462-9f52-0dba08d194e3) and click on Share -> Publish.
+```
+npm run build
+```
 
-## Can I connect a custom domain to my Lovable project?
+yarn build
+Esto generará una carpeta build lista para desplegar en un servidor web.
 
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+## Tecnologías utilizadas
+* React
