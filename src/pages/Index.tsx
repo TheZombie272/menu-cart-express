@@ -129,19 +129,24 @@ const Index = () => {
         deliveryCost={DELIVERY_COST}
       />
 
-      {/* Hero Section */}
-      <section className="relative py-20 px-4">
-        <div className="container mx-auto text-center">
-          <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
+      {/* Hero Section with Background Image */}
+      <section 
+        className="relative py-20 px-4 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: `linear-gradient(rgba(255, 107, 53, 0.8), rgba(247, 147, 30, 0.8)), url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')`
+        }}
+      >
+        <div className="container mx-auto text-center text-white">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 drop-shadow-lg">
             Bienvenido a{" "}
-            <span className="bg-gradient-to-r from-orange-500 to-amber-500 bg-clip-text text-transparent">
+            <span className="text-white">
               Restaurante Delicia
             </span>
           </h1>
-          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl mb-8 max-w-2xl mx-auto drop-shadow-md">
             Disfruta de nuestros platos frescos y deliciosos, preparados con amor e ingredientes de la mejor calidad
           </p>
-          <div className="w-24 h-1 restaurant-gradient mx-auto rounded-full"></div>
+          <div className="w-24 h-1 bg-white mx-auto rounded-full"></div>
         </div>
       </section>
 
