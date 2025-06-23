@@ -30,11 +30,13 @@ interface HeaderProps {
   updateQuantity: (id: number, quantity: number) => void;
   removeFromCart: (id: number) => void;
   handleWhatsAppOrder: () => void;
+  deliveryCost: number;
 }
 
-export const Header = ({ cart, updateQuantity, removeFromCart, handleWhatsAppOrder }: HeaderProps) => {
+export const Header = ({ cart, updateQuantity, removeFromCart, handleWhatsAppOrder, deliveryCost }: HeaderProps) => {
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-  const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+  const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+  const totalPrice = subtotal + (cart.length > 0 ? deliveryCost : 0);
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
@@ -84,8 +86,20 @@ export const Header = ({ cart, updateQuantity, removeFromCart, handleWhatsAppOrd
                     ))}
                   </div>
                   
-                  <div className="border-t pt-4">
-                    <div className="flex justify-between items-center mb-4">
+                  <div className="border-t pt-4 space-y-2">
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm">Subtotal:</span>
+                      <span className="text-sm font-medium">
+                        ${subtotal.toLocaleString()}
+                      </span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm">Domicilio:</span>
+                      <span className="text-sm font-medium">
+                        ${deliveryCost.toLocaleString()}
+                      </span>
+                    </div>
+                    <div className="flex justify-between items-center border-t pt-2">
                       <span className="text-lg font-semibold">Total:</span>
                       <span className="text-xl font-bold text-orange-600">
                         ${totalPrice.toLocaleString()}

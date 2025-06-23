@@ -3,8 +3,8 @@ import { useState } from "react";
 import { Header } from "@/components/Header";
 import { ProductCard } from "@/components/ProductCard";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
+import { useProducts } from "@/hooks/useProducts";
 
 interface Product {
   id: number;
@@ -19,114 +19,13 @@ interface CartProduct extends Product {
   quantity: number;
 }
 
-const products: Product[] = [
-  // Hamburguesas
-  {
-    id: 1,
-    name: "Hamburguesa Clásica",
-    price: 12000,
-    image: "photo-1618160702438-9b02ab6515c9",
-    description: "Jugosa carne de res, lechuga, tomate, cebolla y nuestra salsa especial",
-    category: "Hamburguesas"
-  },
-  {
-    id: 2,
-    name: "Hamburguesa BBQ",
-    price: 15000,
-    image: "photo-1618160702438-9b02ab6515c9",
-    description: "Carne de res, tocino, cebolla caramelizada y salsa BBQ casera",
-    category: "Hamburguesas"
-  },
-  {
-    id: 3,
-    name: "Hamburguesa Vegana",
-    price: 14000,
-    image: "photo-1618160702438-9b02ab6515c9",
-    description: "Deliciosa hamburguesa plant-based con vegetales frescos",
-    category: "Hamburguesas"
-  },
-  {
-    id: 4,
-    name: "Hamburguesa Pollo",
-    price: 13000,
-    image: "photo-1618160702438-9b02ab6515c9",
-    description: "Pechuga de pollo crispy, aguacate, lechuga y mayo de cilantro",
-    category: "Hamburguesas"
-  },
-  // Bebidas
-  {
-    id: 5,
-    name: "Limonada Natural",
-    price: 5000,
-    image: "photo-1465146344425-f00d5f5c8f07",
-    description: "Refrescante limonada con limones frescos y hierbabuena",
-    category: "Bebidas"
-  },
-  {
-    id: 6,
-    name: "Malteada de Fresa",
-    price: 8000,
-    image: "photo-1465146344425-f00d5f5c8f07",
-    description: "Cremosa malteada con fresas naturales y helado de vainilla",
-    category: "Bebidas"
-  },
-  {
-    id: 7,
-    name: "Café Americano",
-    price: 4000,
-    image: "photo-1465146344425-f00d5f5c8f07",
-    description: "Café de origen colombiano, tostado artesanal",
-    category: "Bebidas"
-  },
-  {
-    id: 8,
-    name: "Smoothie Verde",
-    price: 9000,
-    image: "photo-1465146344425-f00d5f5c8f07",
-    description: "Espinaca, piña, manzana verde y jengibre. ¡Súper saludable!",
-    category: "Bebidas"
-  },
-  // Postres
-  {
-    id: 9,
-    name: "Cheesecake de Frutos",
-    price: 7000,
-    image: "photo-1618160702438-9b02ab6515c9",
-    description: "Cremoso cheesecake con mermelada de frutos rojos",
-    category: "Postres"
-  },
-  {
-    id: 10,
-    name: "Brownie con Helado",
-    price: 8000,
-    image: "photo-1618160702438-9b02ab6515c9",
-    description: "Brownie de chocolate caliente con helado de vainilla",
-    category: "Postres"
-  },
-  {
-    id: 11,
-    name: "Tiramisú Casero",
-    price: 9000,
-    image: "photo-1618160702438-9b02ab6515c9",
-    description: "Clásico tiramisú italiano con café expresso y mascarpone",
-    category: "Postres"
-  },
-  {
-    id: 12,
-    name: "Helado Artesanal",
-    price: 6000,
-    image: "photo-1618160702438-9b02ab6515c9",
-    description: "3 bolas de helado artesanal: vainilla, chocolate y fresa",
-    category: "Postres"
-  }
-];
-
-const categories = ["Todos", "Hamburguesas", "Bebidas", "Postres"];
+const DELIVERY_COST = 4000;
 
 const Index = () => {
   const [cart, setCart] = useState<CartProduct[]>([]);
   const [selectedCategory, setSelectedCategory] = useState("Todos");
   const { toast } = useToast();
+  const { products, categories, loading } = useProducts();
 
   const filteredProducts = selectedCategory === "Todos" 
     ? products 
@@ -187,7 +86,8 @@ const Index = () => {
       return;
     }
 
-    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const total = subtotal + DELIVERY_COST;
     
     let message = "¡Hola! 🍽️ Me gustaría hacer el siguiente pedido:\n\n";
     
@@ -195,14 +95,29 @@ const Index = () => {
       message += `• ${item.name} x${item.quantity} - $${(item.price * item.quantity).toLocaleString()}\n`;
     });
     
-    message += `\n💰 *Total: $${total.toLocaleString()}*\n\n`;
+    message += `\n💰 *Subtotal: $${subtotal.toLocaleString()}*\n`;
+    message += `🚚 *Domicilio: $${DELIVERY_COST.toLocaleString()}*\n`;
+    message += `💳 *Total: $${total.toLocaleString()}*\n\n`;
     message += "¡Gracias! 😊";
 
     const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/573001234567?text=${encodedMessage}`;
+    const whatsappUrl = `https://wa.me/573127142928?text=${encodedMessage}`;
     
     window.open(whatsappUrl, '_blank');
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-orange-50 to-amber-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-12 h-12 restaurant-gradient rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
+            <span className="text-white font-bold text-xl">R</span>
+          </div>
+          <p className="text-gray-600">Cargando productos...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 to-amber-50">
@@ -211,6 +126,7 @@ const Index = () => {
         updateQuantity={updateQuantity}
         removeFromCart={removeFromCart}
         handleWhatsAppOrder={handleWhatsAppOrder}
+        deliveryCost={DELIVERY_COST}
       />
 
       {/* Hero Section */}
@@ -275,7 +191,7 @@ const Index = () => {
           </p>
           <div className="flex justify-center space-x-6 text-sm text-gray-400">
             <span>📍 Calle 123 #45-67, Bogotá</span>
-            <span>📞 +57 300 123 4567</span>
+            <span>📞 +57 312 714 2928</span>
             <span>⏰ Lun-Dom: 11:00 AM - 10:00 PM</span>
           </div>
         </div>
