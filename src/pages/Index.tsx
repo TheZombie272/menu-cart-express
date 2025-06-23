@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Header } from "@/components/Header";
 import { ProductCard } from "@/components/ProductCard";
@@ -201,6 +200,29 @@ const Index = () => {
           </div>
         </div>
       </footer>
+
+      {/* Promotional Section */}
+      <section className="bg-gradient-to-r from-orange-600 to-amber-600 text-white py-8 px-4">
+        <div className="container mx-auto text-center">
+          <h4 className="text-lg font-semibold mb-2">
+            ¿Tu negocio necesita presencia digital?
+          </h4>
+          <p className="text-orange-100 mb-4">
+            Creamos páginas web profesionales y sistemas de automatización para impulsar tu empresa
+          </p>
+          <div className="flex items-center justify-center space-x-2">
+            <span className="text-sm">📱 Contáctanos:</span>
+            <a 
+              href="https://wa.me/573127142928?text=Hola!%20Me%20interesa%20una%20página%20web%20para%20mi%20negocio"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-bold text-yellow-200 hover:text-yellow-100 transition-colors underline"
+            >
+              +57 312 714 2928
+            </a>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };
