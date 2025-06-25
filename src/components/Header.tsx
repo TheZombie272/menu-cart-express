@@ -1,8 +1,8 @@
-
 import { ShoppingCart, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Link, useLocation } from "react-router-dom";
+import { useState } from "react";
 import {
   Sheet,
   SheetContent,
@@ -12,6 +12,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { CartItem } from "./CartItem";
+import { LocationInput } from "./LocationInput";
 
 interface Product {
   id: number;
@@ -30,15 +31,20 @@ interface HeaderProps {
   cart: CartProduct[];
   updateQuantity: (id: number, quantity: number) => void;
   removeFromCart: (id: number) => void;
-  handleWhatsAppOrder: () => void;
+  handleWhatsAppOrder: (location?: string) => void;
   deliveryCost: number;
 }
 
 export const Header = ({ cart, updateQuantity, removeFromCart, handleWhatsAppOrder, deliveryCost }: HeaderProps) => {
+  const [userLocation, setUserLocation] = useState("");
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
   const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
   const totalPrice = subtotal + (cart.length > 0 ? deliveryCost : 0);
   const location = useLocation();
+
+  const handleFinalizeOrder = () => {
+    handleWhatsAppOrder(userLocation);
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
@@ -133,7 +139,7 @@ export const Header = ({ cart, updateQuantity, removeFromCart, handleWhatsAppOrd
                   <p className="text-center text-gray-500 py-8">Tu carrito está vacío</p>
                 ) : (
                   <>
-                    <div className="space-y-3 max-h-96 overflow-y-auto">
+                    <div className="space-y-3 max-h-64 overflow-y-auto">
                       {cart.map((item) => (
                         <CartItem
                           key={item.id}
@@ -143,6 +149,11 @@ export const Header = ({ cart, updateQuantity, removeFromCart, handleWhatsAppOrd
                         />
                       ))}
                     </div>
+                    
+                    <LocationInput 
+                      location={userLocation}
+                      onLocationChange={setUserLocation}
+                    />
                     
                     <div className="border-t pt-4 space-y-2">
                       <div className="flex justify-between items-center">
@@ -165,7 +176,7 @@ export const Header = ({ cart, updateQuantity, removeFromCart, handleWhatsAppOrd
                       </div>
                       
                       <Button 
-                        onClick={handleWhatsAppOrder}
+                        onClick={handleFinalizeOrder}
                         className="w-full restaurant-gradient text-white hover:opacity-90 transition-opacity"
                         size="lg"
                       >

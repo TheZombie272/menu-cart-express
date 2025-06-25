@@ -4,6 +4,7 @@ import { ProductCard } from "@/components/ProductCard";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { useProducts } from "@/hooks/useProducts";
+import { Star, Users, Clock, Award } from "lucide-react";
 
 interface Product {
   id: number;
@@ -75,7 +76,7 @@ const Index = () => {
     });
   };
 
-  const handleWhatsAppOrder = () => {
+  const handleWhatsAppOrder = (location?: string) => {
     if (cart.length === 0) {
       toast({
         title: "Carrito vacío",
@@ -97,6 +98,11 @@ const Index = () => {
     message += `\n💰 *Subtotal: $${subtotal.toLocaleString()}*\n`;
     message += `🚚 *Domicilio: $${DELIVERY_COST.toLocaleString()}*\n`;
     message += `💳 *Total: $${total.toLocaleString()}*\n\n`;
+    
+    if (location && location.trim()) {
+      message += `📍 *Dirección de entrega:* ${location}\n\n`;
+    }
+    
     message += "¡Gracias! 😊";
 
     const encodedMessage = encodeURIComponent(message);
@@ -149,16 +155,58 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Features Section */}
+      <section className="py-16 px-4 bg-white">
+        <div className="container mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div className="text-center group">
+              <div className="w-16 h-16 restaurant-gradient rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                <Star className="h-8 w-8 text-white" />
+              </div>
+              <h3 className="font-semibold text-lg mb-2">Calidad Premium</h3>
+              <p className="text-gray-600 text-sm">Ingredientes frescos y de la mejor calidad</p>
+            </div>
+            
+            <div className="text-center group">
+              <div className="w-16 h-16 restaurant-gradient rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                <Clock className="h-8 w-8 text-white" />
+              </div>
+              <h3 className="font-semibold text-lg mb-2">Entrega Rápida</h3>
+              <p className="text-gray-600 text-sm">Domicilios en tiempo récord</p>
+            </div>
+            
+            <div className="text-center group">
+              <div className="w-16 h-16 restaurant-gradient rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                <Users className="h-8 w-8 text-white" />
+              </div>
+              <h3 className="font-semibold text-lg mb-2">Atención Personalizada</h3>
+              <p className="text-gray-600 text-sm">Servicio al cliente excepcional</p>
+            </div>
+            
+            <div className="text-center group">
+              <div className="w-16 h-16 restaurant-gradient rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                <Award className="h-8 w-8 text-white" />
+              </div>
+              <h3 className="font-semibold text-lg mb-2">Experiencia Única</h3>
+              <p className="text-gray-600 text-sm">Sabores que conquistan paladares</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Category Filter */}
       <section className="py-8 px-4">
         <div className="container mx-auto">
+          <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">
+            Nuestro Menú
+          </h2>
           <div className="flex flex-wrap justify-center gap-4">
             {categories.map((category) => (
               <Button
                 key={category}
                 variant={selectedCategory === category ? "default" : "outline"}
                 onClick={() => setSelectedCategory(category)}
-                className={selectedCategory === category ? "restaurant-gradient text-white" : ""}
+                className={`${selectedCategory === category ? "restaurant-gradient text-white" : ""} hover:scale-105 transition-transform`}
               >
                 {category}
               </Button>
@@ -178,6 +226,46 @@ const Index = () => {
                 addToCart={addToCart}
               />
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-16 px-4 bg-gradient-to-r from-orange-100 to-amber-100">
+        <div className="container mx-auto">
+          <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">
+            Lo que dicen nuestros clientes
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+              <div className="flex mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
+                ))}
+              </div>
+              <p className="text-gray-600 mb-4">"La comida es excepcional y el servicio impecable. ¡Definitivamente mi restaurante favorito!"</p>
+              <p className="font-semibold text-orange-600">- María González</p>
+            </div>
+            
+            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+              <div className="flex mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
+                ))}
+              </div>
+              <p className="text-gray-600 mb-4">"Ingredientes frescos, sabores auténticos y precios justos. ¡Altamente recomendado!"</p>
+              <p className="font-semibold text-orange-600">- Carlos Ramírez</p>
+            </div>
+            
+            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+              <div className="flex mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
+                ))}
+              </div>
+              <p className="text-gray-600 mb-4">"El mejor domicilio de la ciudad. Siempre llega rápido y caliente. ¡Excelente!"</p>
+              <p className="font-semibold text-orange-600">- Ana Martínez</p>
+            </div>
           </div>
         </div>
       </section>
