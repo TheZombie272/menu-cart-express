@@ -25,22 +25,6 @@
     "category": "Hamburguesas"
   },
   {
-    "id": 4,
-    "name": "Hamburguesa Pollo",
-    "price": 13000,
-    "image": "photo-1565299624946-b28f40a0ca4b",
-    "description": "Pechuga de pollo crispy, aguacate, lechuga y mayo de cilantro",
-    "category": "Hamburguesas"
-  },
-  {
-    "id": 5,
-    "name": "Pizza Margherita",
-    "price": 18000,
-    "image": "photo-1565299507177-b0ac66763828",
-    "description": "Pizza clásica con tomate, mozzarella fresca y albahaca",
-    "category": "Pizzas"
-  },
-  {
     "id": 6,
     "name": "Pizza Pepperoni",
     "price": 20000,
@@ -127,21 +111,5 @@
     "image": "photo-1540420773420-3366772f4999",
     "description": "Mix de lechugas, tomate cherry, aceitunas, queso feta y vinagreta",
     "category": "Ensaladas"
-  },
-  {
-    "id": 17,
-    "name": "Pasta Carbonara",
-    "price": 16000,
-    "image": "photo-1563379091339-03246963d29a",
-    "description": "Espaguetis con salsa carbonara, tocino y parmesano",
-    "category": "Pastas"
-  },
-  {
-    "id": 18,
-    "name": "Pasta Boloñesa",
-    "price": 15000,
-    "image": "photo-1565299585323-38174c4a6234",
-    "description": "Espaguetis con salsa boloñesa casera y queso parmesano",
-    "category": "Pastas"
   }
 ]
