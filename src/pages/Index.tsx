@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Header } from "@/components/Header";
 import { ProductCard } from "@/components/ProductCard";
@@ -155,6 +156,42 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Category Filter */}
+      <section className="py-8 px-4">
+        <div className="container mx-auto">
+          <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">
+            Nuestro Menú
+          </h2>
+          <div className="flex flex-wrap justify-center gap-4">
+            {categories.map((category) => (
+              <Button
+                key={category}
+                variant={selectedCategory === category ? "default" : "outline"}
+                onClick={() => setSelectedCategory(category)}
+                className={`${selectedCategory === category ? "restaurant-gradient text-white" : ""} hover:scale-105 transition-transform`}
+              >
+                {category}
+              </Button>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Products Grid */}
+      <section className="py-12 px-4">
+        <div className="container mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {filteredProducts.map((product) => (
+              <ProductCard
+                key={product.id}
+                product={product}
+                addToCart={addToCart}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Features Section */}
       <section className="py-16 px-4 bg-white">
         <div className="container mx-auto">
@@ -190,42 +227,6 @@ const Index = () => {
               <h3 className="font-semibold text-lg mb-2">Experiencia Única</h3>
               <p className="text-gray-600 text-sm">Sabores que conquistan paladares</p>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Category Filter */}
-      <section className="py-8 px-4">
-        <div className="container mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">
-            Nuestro Menú
-          </h2>
-          <div className="flex flex-wrap justify-center gap-4">
-            {categories.map((category) => (
-              <Button
-                key={category}
-                variant={selectedCategory === category ? "default" : "outline"}
-                onClick={() => setSelectedCategory(category)}
-                className={`${selectedCategory === category ? "restaurant-gradient text-white" : ""} hover:scale-105 transition-transform`}
-              >
-                {category}
-              </Button>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Products Grid */}
-      <section className="py-12 px-4">
-        <div className="container mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {filteredProducts.map((product) => (
-              <ProductCard
-                key={product.id}
-                product={product}
-                addToCart={addToCart}
-              />
-            ))}
           </div>
         </div>
       </section>
