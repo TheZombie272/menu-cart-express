@@ -28,7 +28,7 @@
     "id": 4,
     "name": "Hamburguesa Pollo",
     "price": 13000,
-    "image": "photo-1606755962773-d324e2dabd33",
+    "image": "photo-1565299624946-b28f40a0ca4b",
     "description": "Pechuga de pollo crispy, aguacate, lechuga y mayo de cilantro",
     "category": "Hamburguesas"
   },
@@ -36,7 +36,7 @@
     "id": 5,
     "name": "Pizza Margherita",
     "price": 18000,
-    "image": "photo-1604382354936-07c5b6f67692",
+    "image": "photo-1565299507177-b0ac66763828",
     "description": "Pizza clásica con tomate, mozzarella fresca y albahaca",
     "category": "Pizzas"
   },
@@ -60,7 +60,7 @@
     "id": 8,
     "name": "Malteada de Fresa",
     "price": 8000,
-    "image": "photo-1579952363873-27d3bfad9c0d",
+    "image": "photo-1541544181051-e46607e5fd35",
     "description": "Cremosa malteada con fresas naturales y helado de vainilla",
     "category": "Bebidas"
   },
@@ -132,7 +132,7 @@
     "id": 17,
     "name": "Pasta Carbonara",
     "price": 16000,
-    "image": "photo-1621996346565-e3dbc353d2e5",
+    "image": "photo-1563379091339-03246963d29a",
     "description": "Espaguetis con salsa carbonara, tocino y parmesano",
     "category": "Pastas"
   },
@@ -140,7 +140,7 @@
     "id": 18,
     "name": "Pasta Boloñesa",
     "price": 15000,
-    "image": "photo-1572441713132-51c75654db73",
+    "image": "photo-1565299585323-38174c4a6234",
     "description": "Espaguetis con salsa boloñesa casera y queso parmesano",
     "category": "Pastas"
   }
